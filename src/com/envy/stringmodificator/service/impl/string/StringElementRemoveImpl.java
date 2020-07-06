@@ -8,6 +8,7 @@ public class StringElementRemoveImpl implements ElementRemove {
     private static final String NON_WHITESPACE_SYMBOLS = "[^a-zA-Z\\d\\s:]";
     private static final String WHITESPACE = " ";
     private static final String REGEX_SEPARATOR = "\\b";
+    private static final String WORD_LENGTH = "\\p{L}{%d}";
 
     @Override
     public String removeNonWhitespaceSymbols(String text) throws CustomInvalidDataException {
@@ -30,11 +31,11 @@ public class StringElementRemoveImpl implements ElementRemove {
         String[] separateText = text.split(REGEX_SEPARATOR);
 
         for (String word : separateText) {
-            if (word.length() != wordLength) {
+            if (word.length() != wordLength || !word.matches(String.format(WORD_LENGTH, wordLength))) {
                 bufferString.append(word);
             } else {
                 if (VOWELS.contains(String.valueOf(word.charAt(0)))) {
-                    bufferString.append(word);
+                    continue;
                 }
             }
         }

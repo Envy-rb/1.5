@@ -10,7 +10,7 @@ public class RegexElementRemoveImpl implements ElementRemove {
 
     private static final String NON_WHITESPACE_SYMBOLS = "[^a-zA-Z\\d\\s:]";
     private static final String WHITESPACE = " ";
-    private static final String WORDS_BY_LENGTH_STRATING_AT_VOWEL = "\\b[AEIOUYaeiouy][^\\W\\d]{%d}\\b";
+    private static final String WORDS_BY_LENGTH_STARTING_AT_VOWEL = "\\b[AEIOUYaeiouy][^\\W\\d]{%d}\\b";
     private static final String BLANK = "";
 
     @Override
@@ -32,7 +32,7 @@ public class RegexElementRemoveImpl implements ElementRemove {
             throw new CustomInvalidDataException("Invalid data or null string");
         }
 
-        Pattern pattern = Pattern.compile(String.format(WORDS_BY_LENGTH_STRATING_AT_VOWEL, wordLength - 1));
+        Pattern pattern = Pattern.compile(String.format(WORDS_BY_LENGTH_STARTING_AT_VOWEL, wordLength - 1));
         Matcher matcher = pattern.matcher(text);
         text = matcher.replaceAll(BLANK);
 
